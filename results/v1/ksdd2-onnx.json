@@ -1,0 +1,22 @@
+{
+  "path": "runs\\ksdd2-routing\\model.onnx",
+  "backend": "CPU patch-memory equivalent graph",
+  "parity": "passed",
+  "batch_size": 1,
+  "timing_scope": "preprocessed NCHW float32 input, feature extraction and nearest neighbor; excludes resize/routing",
+  "onnx_bytes": 17505,
+  "max_map_abs_error": 2.7418136596679688e-06,
+  "measured": {
+    "pytorch": {
+      "p50_ms": 1.7169999991892837,
+      "p95_ms": 2.0750150013554958
+    },
+    "onnxruntime": {
+      "p50_ms": 1.3939500004198635,
+      "p95_ms": 2.57785000030708
+    }
+  },
+  "device": "cpu",
+  "threads": 1,
+  "gpu_memory_bytes": null
+}

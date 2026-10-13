@@ -1,0 +1,30 @@
+{
+  "dataset": "ksdd2",
+  "category": "ksdd2",
+  "synthetic": false,
+  "protocol": "official train normals only; complete official test; fixed hyperparameters",
+  "n_train_normal": 2085,
+  "n_test": 1004,
+  "n_test_defect": 110,
+  "excluded_training_defects": 246,
+  "image_auroc": 0.9282285946715477,
+  "pixel_auroc": 0.9227541737011875,
+  "aupro_0_30_approx": 0.8127674093319643,
+  "pixel_evaluation_images": 1004,
+  "pixel_resolution": [
+    96,
+    96
+  ],
+  "pixel_note": "96x96 nearest-neighbor masks; small defects can vanish. Not native-resolution official localization score.",
+  "backend": "patch_memory_cpu",
+  "model_bytes": 12250,
+  "train_seconds": 8.127543099999457,
+  "p50_inference_ms": 2.395499999693129,
+  "p95_inference_ms": 3.6539250018904537,
+  "timing_scope": "resize/features/nearest-neighbor, excludes decode and routing",
+  "seed": 42,
+  "python": "3.14.0",
+  "platform": "Windows-11-10.0.22621-SP0",
+  "manifest_sha256": "e6eaed53990c6dc613aa4feca171851271f556775d1375e688c1915ca0e0bdc0",
+  "risk_certification": "None: ranking benchmark only; route calibration is a separate experiment"
+}

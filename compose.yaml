@@ -1,0 +1,19 @@
+services:
+  api:
+    build: .
+    ports: ["127.0.0.1:8000:8000"]
+    environment:
+      QC_RUN_DIR: /app/runs/demo
+      QC_STATE_DIR: /app/runs/state
+      QC_API_KEY: ${QC_API_KEY:-}
+    volumes:
+      - ./runs:/app/runs
+      - ./data:/app/data:ro
+  dashboard:
+    build: .
+    command: streamlit run dashboard.py --server.address 0.0.0.0 --server.headless true --browser.gatherUsageStats false
+    ports: ["127.0.0.1:8501:8501"]
+    environment:
+      QC_API_URL: http://api:8000
+      QC_API_KEY: ${QC_API_KEY:-}
+    depends_on: [api]

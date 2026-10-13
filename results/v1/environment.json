@@ -1,0 +1,15 @@
+{
+  "numpy": "2.3.5",
+  "scipy": "1.18.0",
+  "Pillow": "12.2.0",
+  "fastapi": "0.143.0",
+  "uvicorn": "0.54.0",
+  "streamlit": "1.65.0",
+  "httpx": "0.28.1",
+  "pytest": "9.1.1",
+  "torch": "2.12.1",
+  "torchvision": "0.27.1",
+  "onnx": "1.23.2",
+  "onnxruntime": "1.31.0",
+  "matplotlib": "3.11.2"
+}

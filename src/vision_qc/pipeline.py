@@ -52,6 +52,13 @@ def overlay(image: Image.Image, heatmap: np.ndarray, threshold: float, boxes: li
 
 
 class Inspector:
+    def __new__(cls, run):
+        metadata = json.loads((Path(run) / "model.json").read_text(encoding="utf-8"))
+        if cls is Inspector and metadata.get("schema_version") == 2:
+            from .v2.pipeline import InspectorV2
+            return InspectorV2(run)
+        return super().__new__(cls)
+
     def __init__(self, run: str | Path):
         self.run = Path(run).resolve()
         self.meta = json.loads((self.run / "model.json").read_text(encoding="utf-8"))

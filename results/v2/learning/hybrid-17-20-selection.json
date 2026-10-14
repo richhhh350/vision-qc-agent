@@ -1,0 +1,82 @@
+[
+  {
+    "id": "ksdd2-001652",
+    "source": "hybrid",
+    "conditional_draw_probability": 0.9003875968992249,
+    "remaining": 258,
+    "score": 0.7488083243370056,
+    "uncertainty": 0.5023833513259888
+  },
+  {
+    "id": "ksdd2-001545",
+    "source": "hybrid",
+    "conditional_draw_probability": 0.9003891050583658,
+    "remaining": 257,
+    "score": 0.7494553327560425,
+    "uncertainty": 0.501089334487915
+  },
+  {
+    "id": "ksdd2-001574",
+    "source": "random_audit",
+    "conditional_draw_probability": 0.000390625,
+    "remaining": 256,
+    "score": 0.7994603514671326,
+    "uncertainty": 0.40107929706573486
+  },
+  {
+    "id": "ksdd2-001576",
+    "source": "hybrid",
+    "conditional_draw_probability": 0.9003921568627451,
+    "remaining": 255,
+    "score": 0.74871426820755,
+    "uncertainty": 0.5025714635848999
+  },
+  {
+    "id": "ksdd2-001753",
+    "source": "hybrid",
+    "conditional_draw_probability": 0.9003937007874016,
+    "remaining": 254,
+    "score": 0.7500683665275574,
+    "uncertainty": 0.49986326694488525
+  },
+  {
+    "id": "ksdd2-001134",
+    "source": "hybrid",
+    "conditional_draw_probability": 0.9003952569169961,
+    "remaining": 253,
+    "score": 0.7508230805397034,
+    "uncertainty": 0.49835383892059326
+  },
+  {
+    "id": "ksdd2-000138",
+    "source": "random_audit",
+    "conditional_draw_probability": 0.0003968253968253968,
+    "remaining": 252,
+    "score": 0.7515031099319458,
+    "uncertainty": 0.4969937801361084
+  },
+  {
+    "id": "ksdd2-001187",
+    "source": "hybrid",
+    "conditional_draw_probability": 0.900398406374502,
+    "remaining": 251,
+    "score": 0.7503779530525208,
+    "uncertainty": 0.4992440938949585
+  },
+  {
+    "id": "ksdd2-001577",
+    "source": "hybrid",
+    "conditional_draw_probability": 0.9004,
+    "remaining": 250,
+    "score": 0.7505567073822021,
+    "uncertainty": 0.4988865852355957
+  },
+  {
+    "id": "ksdd2-000172",
+    "source": "hybrid",
+    "conditional_draw_probability": 0.9004016064257029,
+    "remaining": 249,
+    "score": 0.7507785558700562,
+    "uncertainty": 0.4984428882598877
+  }
+]

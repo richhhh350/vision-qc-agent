@@ -1,0 +1,118 @@
+{
+  "schema_version": 2,
+  "model_version": "20261014T045023-4e11981bd4",
+  "backend": "patchcore",
+  "split": "test",
+  "synthetic": false,
+  "image_auroc": 0.9343400447427294,
+  "n": 1004,
+  "n_defect": 110,
+  "missed_defects": 0,
+  "auto_release_fnr": 0.0,
+  "fnr_upper_95": 0.02686643000626772,
+  "review_rate": 0.8416334661354582,
+  "pass_rate": 0.0,
+  "alarm_rate": 0.15836653386454183,
+  "false_alarm_rate": 0.07606263982102908,
+  "coverage": 0.9272908366533864,
+  "defect_coverage": 0.9818181818181818,
+  "pixel_auroc_binned": 0.9898812912539975,
+  "pixel_auroc_max_binning_error": 0.000237942029065606,
+  "aupro_0_30_binned": 0.938733561754878,
+  "pixel_evaluation_images": 1004,
+  "normal_pixels": 145925067,
+  "defect_pixels": 486461,
+  "region_count": 120,
+  "region_hit_at_train_threshold": {
+    "1-16": {
+      "hits": 1,
+      "total": 1,
+      "recall": 1.0
+    },
+    "17-64": {
+      "hits": 0,
+      "total": 0,
+      "recall": null
+    },
+    "65-256": {
+      "hits": 2,
+      "total": 5,
+      "recall": 0.4
+    },
+    ">256": {
+      "hits": 108,
+      "total": 114,
+      "recall": 0.9473684210526315
+    }
+  },
+  "pixel_protocol": "native masks, restored maps; 8192 atan bins; 4-connected regions; approximate AUPRO",
+  "review_cost_scenarios": [
+    {
+      "defect_prevalence": 0.001,
+      "review_rate": 0.9231861500915193
+    },
+    {
+      "defect_prevalence": 0.01,
+      "review_rate": 0.9164252593044538
+    },
+    {
+      "defect_prevalence": 0.05,
+      "review_rate": 0.8863768558063859
+    }
+  ],
+  "ece": 0.01684026130745036,
+  "latency_p50_ms": 110.40285000012773,
+  "latency_p95_ms": 142.5951799997165,
+  "timing_scope": "preprocess+detectors+geometry+route; excludes decoding, HTTP and disk",
+  "release_gate": {
+    "approved": false,
+    "target_fnr": 0.01,
+    "validation": {
+      "n": 258,
+      "n_defect": 50,
+      "missed_defects": 2,
+      "auto_release_fnr": 0.04,
+      "fnr_upper_95": 0.12061415542204412,
+      "review_rate": 0.624031007751938,
+      "pass_rate": 0.1511627906976744,
+      "alarm_rate": 0.2248062015503876,
+      "false_alarm_rate": 0.11057692307692307,
+      "coverage": 0.8992248062015504,
+      "defect_coverage": 0.96
+    },
+    "reason": "independent_production_evidence_missing"
+  },
+  "certificate": {
+    "policy_sha256": "4e11981bd453bcdc8a42cbc66d84b1c4b959d6f6c1bcc0904484b1ac84b53eb9",
+    "calibration_sha256": "4ec0c464d1a126e01cb66a73ccbc0430a2e395303613b671eb0db53c4188999f",
+    "acceptance_sha256": "97de0e4b59b51cc1f2c3ed752159f8c133114f1c8abda0f426dc00f424c02571",
+    "category": "ksdd2",
+    "created_at": "2026-10-14T04:50:57.581670+00:00",
+    "expires_at": "2026-11-13T04:50:57.581670+00:00",
+    "independent_sampling_attested": false,
+    "synthetic": false,
+    "confidence": 0.95,
+    "target_fnr": 0.01,
+    "n_defect": 50,
+    "missed_defects": 2,
+    "false_alarm_rate": 0.11057692307692307,
+    "fnr_upper_95": 0.12061415542204412,
+    "scope": "frozen whole policy; one-time independent acceptance"
+  },
+  "pixel_missing_defect_masks": 0,
+  "secondary_calls": 0,
+  "caveat": "Repeated public benchmark; not new independent production acceptance",
+  "raw_conformal_routing": {
+    "n": 1004,
+    "n_defect": 110,
+    "missed_defects": 2,
+    "auto_release_fnr": 0.01818181818181818,
+    "fnr_upper_95": 0.05612708514646994,
+    "review_rate": 0.6444223107569721,
+    "pass_rate": 0.1942231075697211,
+    "alarm_rate": 0.16135458167330677,
+    "false_alarm_rate": 0.07941834451901567,
+    "coverage": 0.9272908366533864,
+    "defect_coverage": 0.9818181818181818
+  }
+}

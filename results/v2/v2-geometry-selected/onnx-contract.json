@@ -1,0 +1,18 @@
+{
+  "schema_version": 2,
+  "source_policy_sha256": "4e11981bd453bcdc8a42cbc66d84b1c4b959d6f6c1bcc0904484b1ac84b53eb9",
+  "sha256": "5cdc6c3423e84385eed2d0162129a7b477631a6effdcfb6557b30b91320358db",
+  "geometry": {
+    "size": 256,
+    "mode": "letterbox",
+    "overlap": 0.25,
+    "max_tiles": 64
+  },
+  "threads": 4,
+  "input": "RGB float32 [0,1]; fixed one-tile BCHW; normalization embedded",
+  "source_backend": "patchcore",
+  "score_aggregation": "max per tile",
+  "map_aggregation": "mean overlap",
+  "release_approved": false,
+  "note": "Changing runtime requires recalibration and fresh whole-policy acceptance"
+}

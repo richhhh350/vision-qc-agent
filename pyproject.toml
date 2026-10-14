@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "vision-qc-agent"
-version = "1.0.0"
+version = "2.0.0"
 description = "Local visual quality inspection with calibrated routing and active learning"
 requires-python = ">=3.11"
 dependencies = [
@@ -17,10 +17,11 @@ dependencies = [
 dev = ["pytest>=8,<10"]
 plots = ["matplotlib>=3.8,<4"]
 onnx = ["torch>=2.4", "onnx>=1.17", "onnxruntime>=1.20"]
-deep = ["anomalib>=2.0,<3", "torch>=2.4", "torchvision>=0.19"]
+deep = ["anomalib==2.2.0", "torch==2.12.1", "torchvision==0.27.1", "timm==1.0.30", "psutil>=6,<8"]
 
 [project.scripts]
 vision-qc = "vision_qc.cli:main"
+vision-qc-v2 = "vision_qc.v2.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]

@@ -8,7 +8,7 @@ from pathlib import Path
 import numpy as np
 from PIL import Image, ImageDraw
 
-SPLITS = {"train", "prob_fit", "calibration", "validation", "test", "pool"}
+SPLITS = {"train", "dev", "prob_fit", "calibration", "validation", "acceptance", "test", "pool"}
 
 
 @dataclass(frozen=True)

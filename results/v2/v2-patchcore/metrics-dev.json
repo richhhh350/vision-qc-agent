@@ -1,0 +1,118 @@
+{
+  "schema_version": 2,
+  "model_version": "20261014T043158-57c7d62d07",
+  "backend": "patchcore",
+  "split": "dev",
+  "synthetic": false,
+  "image_auroc": 0.9007211538461538,
+  "n": 228,
+  "n_defect": 20,
+  "missed_defects": 0,
+  "auto_release_fnr": 0.0,
+  "fnr_upper_95": 0.13910834066826516,
+  "review_rate": 0.8947368421052632,
+  "pass_rate": 0.0,
+  "alarm_rate": 0.10526315789473684,
+  "false_alarm_rate": 0.052884615384615384,
+  "coverage": 0.9517543859649122,
+  "defect_coverage": 1.0,
+  "pixel_auroc_binned": 0.9744055990422922,
+  "pixel_auroc_max_binning_error": 0.0006886348535801166,
+  "aupro_0_30_binned": 0.9015996674577703,
+  "pixel_evaluation_images": 228,
+  "normal_pixels": 33214678,
+  "defect_pixels": 57644,
+  "region_count": 22,
+  "region_hit_at_train_threshold": {
+    "1-16": {
+      "hits": 0,
+      "total": 0,
+      "recall": null
+    },
+    "17-64": {
+      "hits": 0,
+      "total": 0,
+      "recall": null
+    },
+    "65-256": {
+      "hits": 1,
+      "total": 1,
+      "recall": 1.0
+    },
+    ">256": {
+      "hits": 20,
+      "total": 21,
+      "recall": 0.9523809523809523
+    }
+  },
+  "pixel_protocol": "native masks, restored maps; 8192 atan bins; 4-connected regions; approximate AUPRO",
+  "review_cost_scenarios": [
+    {
+      "defect_prevalence": 0.001,
+      "review_rate": 0.9465182692307692
+    },
+    {
+      "defect_prevalence": 0.01,
+      "review_rate": 0.9411442307692307
+    },
+    {
+      "defect_prevalence": 0.05,
+      "review_rate": 0.9172596153846153
+    }
+  ],
+  "ece": 0.03235661614832189,
+  "latency_p50_ms": 552.7244999998402,
+  "latency_p95_ms": 814.5763750002737,
+  "timing_scope": "preprocess+detectors+geometry+route; excludes decoding, HTTP and disk",
+  "release_gate": {
+    "approved": false,
+    "target_fnr": 0.01,
+    "validation": {
+      "n": 258,
+      "n_defect": 50,
+      "missed_defects": 1,
+      "auto_release_fnr": 0.02,
+      "fnr_upper_95": 0.09139813071969738,
+      "review_rate": 0.689922480620155,
+      "pass_rate": 0.12790697674418605,
+      "alarm_rate": 0.1821705426356589,
+      "false_alarm_rate": 0.0673076923076923,
+      "coverage": 0.937984496124031,
+      "defect_coverage": 0.98
+    },
+    "reason": "independent_production_evidence_missing"
+  },
+  "certificate": {
+    "policy_sha256": "57c7d62d073f514d5efe186415e5aaa41f5a2796f8b7fe683fb8b02314e48b38",
+    "calibration_sha256": "4ec0c464d1a126e01cb66a73ccbc0430a2e395303613b671eb0db53c4188999f",
+    "acceptance_sha256": "97de0e4b59b51cc1f2c3ed752159f8c133114f1c8abda0f426dc00f424c02571",
+    "category": "ksdd2",
+    "created_at": "2026-10-14T04:33:53.817923+00:00",
+    "expires_at": "2026-11-13T04:33:53.817923+00:00",
+    "independent_sampling_attested": false,
+    "synthetic": false,
+    "confidence": 0.95,
+    "target_fnr": 0.01,
+    "n_defect": 50,
+    "missed_defects": 1,
+    "false_alarm_rate": 0.0673076923076923,
+    "fnr_upper_95": 0.09139813071969738,
+    "scope": "frozen whole policy; one-time independent acceptance"
+  },
+  "pixel_missing_defect_masks": 0,
+  "secondary_calls": 0,
+  "caveat": "Repeated public benchmark; not new independent production acceptance",
+  "raw_conformal_routing": {
+    "n": 228,
+    "n_defect": 20,
+    "missed_defects": 0,
+    "auto_release_fnr": 0.0,
+    "fnr_upper_95": 0.13910834066826516,
+    "review_rate": 0.7412280701754386,
+    "pass_rate": 0.15350877192982457,
+    "alarm_rate": 0.10526315789473684,
+    "false_alarm_rate": 0.052884615384615384,
+    "coverage": 0.9517543859649122,
+    "defect_coverage": 1.0
+  }
+}

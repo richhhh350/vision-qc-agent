@@ -6,6 +6,7 @@ import json
 import os
 import secrets
 import threading
+import time
 import warnings
 from pathlib import Path
 from typing import Literal
@@ -28,6 +29,9 @@ class Feedback(BaseModel):
 
 
 def create_app(run: Path | None = None, state: Path | None = None) -> FastAPI:
+    if run is None and os.getenv("QC_REGISTRY_DIR"):
+        from .v2.registry import Registry
+        run = Registry(os.environ["QC_REGISTRY_DIR"]).active_run()
     run = run or Path(os.getenv("QC_RUN_DIR", "runs/demo"))
     state = (state or Path(os.getenv("QC_STATE_DIR", "runs/state"))).resolve()
     state.mkdir(parents=True, exist_ok=True)
@@ -35,6 +39,10 @@ def create_app(run: Path | None = None, state: Path | None = None) -> FastAPI:
     inspector = Inspector(run) if (run / "model.json").exists() else None
     lock = threading.Lock()
     key = os.getenv("QC_API_KEY", "")
+    jobs = None
+    if inspector and inspector.meta.get("schema_version") == 2:
+        from .v2.jobs import TrainingJobs
+        jobs = TrainingJobs(run,state)
 
     def auth(x_api_key: str | None = Header(default=None)):
         if key and not secrets.compare_digest(x_api_key or "", key):
@@ -55,11 +63,19 @@ def create_app(run: Path | None = None, state: Path | None = None) -> FastAPI:
     @app.get("/model")
     def model_info():
         model = ready()
+        if model.meta.get("schema_version") == 2:
+            from .v2.evidence import check_certificate
+            approved,reason = check_certificate(model.meta)
+            model.meta["release_gate"].update(approved=approved,reason=reason)
         return dict(run_dir=str(run.resolve()), state_dir=str(state),
+                    schema_version=model.meta.get("schema_version",1),
+                    secondary=model.meta.get("secondary"),certificate=model.meta.get("certificate"),
+                    validation_reference_only=bool(model.meta.get("parent_version") and not model.meta.get("certificate")),
                     **{k: model.meta[k] for k in ("version", "category", "backend", "synthetic", "release_gate", "counts")})
 
     @app.post("/inspect")
     def inspect(file: UploadFile = File(...), category: str = Form(...)):
+        decode_started=time.perf_counter()
         model = ready()
         if not 1 <= len(category) <= 100:
             raise HTTPException(422, "Invalid category")
@@ -75,23 +91,32 @@ def create_app(run: Path | None = None, state: Path | None = None) -> FastAPI:
                     image = opened.convert("RGB")
         except (UnidentifiedImageError, OSError, Image.DecompressionBombError, Image.DecompressionBombWarning, ValueError):
             raise HTTPException(422, "Unsupported or damaged image") from None
+        decode_ms=(time.perf_counter()-decode_started)*1000
         image_hash = hashlib.sha256(image.tobytes() + str(image.size).encode()).hexdigest()
         inspection_id = hashlib.sha256(f"{image_hash}:{model.version}:{category}".encode()).hexdigest()[:24]
         with lock:
+            previous = None
             try:
-                return public(store.get(inspection_id))
+                previous = store.get(inspection_id)
+                if model.meta.get("schema_version") != 2:
+                    return public(previous)
             except KeyError:
                 pass
-            result, heatmap = model.inspect(image, category)
+            try:
+                result, heatmap = model.inspect(image, category)
+            except ValueError as exc:
+                raise HTTPException(422,str(exc)) from None
             # A deterministic 5% audit stream limits feedback bias on automatic decisions.
-            if result["route"] != "review" and int(image_hash[:8], 16) % 20 == 0:
+            if model.meta.get("schema_version") != 2 and result["route"] != "review" and int(image_hash[:8], 16) % 20 == 0:
                 result.update(route="review", reason="random_audit")
+            storage_started=time.perf_counter()
             upload = state / "images"
             upload.mkdir(exist_ok=True)
             image_path = upload / f"{inspection_id}.png"
             image.save(image_path)
             overlay(image, heatmap, model.meta["pixel_threshold"], result["boxes"]).save(upload / f"{inspection_id}-overlay.png")
-            row = store.add(inspection_id, str(image_path), result)
+            row = store.refresh_result(inspection_id,result) if previous else store.add(inspection_id, str(image_path), result)
+            row["result"].setdefault("stage_timing",{}).update(decode_ms=decode_ms,storage_ms=(time.perf_counter()-storage_started)*1000)
         return public(row)
 
     def public(row):
@@ -130,12 +155,74 @@ def create_app(run: Path | None = None, state: Path | None = None) -> FastAPI:
         except KeyError:
             raise HTTPException(404, "Inspection not found") from None
 
+    @app.post("/reviews/{inspection_id}/mask")
+    def save_mask(inspection_id: str, file: UploadFile = File(...), revision: int = Form(...),
+                  annotation_seconds: float | None = Form(default=None)):
+        if annotation_seconds is not None and (not 0 <= annotation_seconds <= 86400):
+            raise HTTPException(422,"Invalid annotation duration")
+        try:
+            row = store.get(inspection_id)
+            raw = file.file.read(10*1024*1024+1)
+            if len(raw)>10*1024*1024:
+                raise ValueError("Mask exceeds 10 MB")
+            with warnings.catch_warnings():
+                warnings.simplefilter("error",Image.DecompressionBombWarning)
+                with Image.open(io.BytesIO(raw)) as opened, Image.open(row["image_path"]) as original:
+                    if opened.size != original.size:
+                        raise ValueError("Mask must have original image dimensions")
+                    mask = opened.convert("L").point(lambda v:255 if v>0 else 0)
+                    if not mask.getbbox():
+                        raise ValueError("Defect mask must contain foreground pixels")
+            directory = state/"masks"
+            directory.mkdir(exist_ok=True)
+            digest = hashlib.sha256(mask.tobytes()).hexdigest()[:16]
+            path = directory/f"{inspection_id}-{revision}-{digest}.png"
+            mask.save(path)
+            store.save_mask(inspection_id,path,revision,annotation_seconds)
+            return dict(id=inspection_id,revision=revision,mask_saved=True)
+        except KeyError:
+            raise HTTPException(404,"Inspection not found") from None
+        except (ValueError,UnidentifiedImageError,OSError,Image.DecompressionBombError,Image.DecompressionBombWarning) as exc:
+            raise HTTPException(422,str(exc)) from None
+
+    @app.post("/training-jobs")
+    def start_training(steps: int = Query(120,ge=1,le=10000)):
+        if jobs is None:
+            raise HTTPException(409,"Background candidate training requires a v2 model")
+        try:
+            return jobs.start(steps)
+        except ValueError as exc:
+            raise HTTPException(409,str(exc)) from None
+
+    @app.get("/training-jobs/{job_id}")
+    def training_status(job_id: str):
+        try:
+            if jobs is None:
+                raise KeyError(job_id)
+            return jobs.get(job_id)
+        except KeyError:
+            raise HTTPException(404,"Training job not found") from None
+
+    @app.post("/training-jobs/{job_id}/cancel")
+    def cancel_training(job_id: str):
+        try:
+            if jobs is None:
+                raise KeyError(job_id)
+            return jobs.cancel(job_id)
+        except KeyError:
+            raise HTTPException(404,"Training job not found") from None
+
     @app.get("/active-learning")
-    def active_learning(strategy: Literal["random", "uncertainty", "coreset"] = "uncertainty", budget: int = Query(10, ge=1, le=100)):
+    def active_learning(strategy: Literal["random", "uncertainty", "coreset", "hybrid"] = "uncertainty", budget: int = Query(10, ge=1, le=100)):
         version = ready().version
         rows = [r for r in store.list("pending", 10000) if r["result"]["model_version"] == version
                 and r["result"]["category"] == ready().meta["category"]]
         items = [dict(id=r["id"], **r["result"]) for r in rows]
+        if strategy == "hybrid":
+            # Pure acquisition has no torch dependency; live results contain no oracle labels.
+            ranked = sorted(items,key=lambda x:-min(x["p_normal"],x["p_defect"]))
+            selected = select_batch(ranked[:max(budget,len(ranked)//2)],budget,"coreset")
+            return {"strategy":strategy,"eligible":len(items),"ids":selected}
         return {"strategy": strategy, "eligible": len(items), "ids": select_batch(items, budget, strategy)}
 
     @app.get("/stats")
@@ -146,10 +233,12 @@ def create_app(run: Path | None = None, state: Path | None = None) -> FastAPI:
     def reports():
         values = []
         # Only aggregate metric files in sibling local runs, never arbitrary client paths.
-        for path in sorted(run.resolve().parent.glob("*/metrics*.json"))[:100]:
+        report_root=run.resolve().parent
+        paths=set(report_root.glob("*/metrics*.json")) | set(report_root.glob("*/*/metrics*.json"))
+        for path in sorted(paths)[:100]:
             try:
                 report = json.loads(path.read_text(encoding="utf-8"))
-                values.append({"name": f"{path.parent.name}/{path.name}", "report": report})
+                values.append({"name": path.relative_to(report_root).as_posix(), "report": report})
             except (ValueError, OSError):
                 continue
         return sorted(values, key=lambda item: (item["report"].get("synthetic", False), item["name"]))

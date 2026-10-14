@@ -1,0 +1,19 @@
+{
+  "detector": {
+    "backend": "patchcore",
+    "backbone": "resnet18",
+    "geometry": {
+      "size": 256,
+      "mode": "letterbox",
+      "overlap": 0.25,
+      "max_tiles": 64
+    },
+    "bank_size": 512,
+    "max_features": 12000,
+    "seed": 42,
+    "threads": 4
+  },
+  "alpha_defect": 0.01,
+  "alpha_normal": 0.05,
+  "protocol": "Predeclared geometry comparison; original train only; evaluate dev before test"
+}

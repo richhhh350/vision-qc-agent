@@ -1,0 +1,60 @@
+{
+  "version": "20261014T043158-57c7d62d07",
+  "backend": "patchcore",
+  "weights": {
+    "detector.pt": "ea35a25e2ab834c949516ceea17575fcd733be36b496407f4e2da07107630a03"
+  },
+  "detector": {
+    "backend": "patchcore",
+    "geometry": {
+      "size": 256,
+      "mode": "tiles",
+      "overlap": 0.25,
+      "max_tiles": 64
+    },
+    "backbone": "resnet18",
+    "bank_size": 512,
+    "max_features": 12000,
+    "seed": 42,
+    "threads": 4,
+    "implementation": "anomalib 2.2.0 torch model",
+    "score_aggregation": "max official per-tile image score",
+    "map_aggregation": "mean overlapping pixels",
+    "embedding": "mean pooled frozen feature maps",
+    "input_color": "RGB",
+    "native_coordinates": true,
+    "training": null
+  },
+  "counts": {
+    "calibration": 307,
+    "dev": 228,
+    "train": 1042,
+    "acceptance": 258,
+    "pool": 268,
+    "prob_fit": 228,
+    "test": 1004
+  },
+  "manifest_sha256": "f54e6a84f1bdc07550ee0275db5f876e8cb0207a94300418867a96f54485dbcb",
+  "evidence": {
+    "calibration_sha256": "4ec0c464d1a126e01cb66a73ccbc0430a2e395303613b671eb0db53c4188999f",
+    "acceptance_sha256": "97de0e4b59b51cc1f2c3ed752159f8c133114f1c8abda0f426dc00f424c02571"
+  },
+  "certificate": {
+    "policy_sha256": "57c7d62d073f514d5efe186415e5aaa41f5a2796f8b7fe683fb8b02314e48b38",
+    "calibration_sha256": "4ec0c464d1a126e01cb66a73ccbc0430a2e395303613b671eb0db53c4188999f",
+    "acceptance_sha256": "97de0e4b59b51cc1f2c3ed752159f8c133114f1c8abda0f426dc00f424c02571",
+    "category": "ksdd2",
+    "created_at": "2026-10-14T04:33:53.817923+00:00",
+    "expires_at": "2026-11-13T04:33:53.817923+00:00",
+    "independent_sampling_attested": false,
+    "synthetic": false,
+    "confidence": 0.95,
+    "target_fnr": 0.01,
+    "n_defect": 50,
+    "missed_defects": 1,
+    "false_alarm_rate": 0.0673076923076923,
+    "fnr_upper_95": 0.09139813071969738,
+    "scope": "frozen whole policy; one-time independent acceptance"
+  },
+  "train_seconds": 406.0632446999998
+}

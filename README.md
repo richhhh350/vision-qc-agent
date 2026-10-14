@@ -1,7 +1,9 @@
 # 视觉质检 Agent
 
 ![CPU checks](https://github.com/richhhh350/vision-qc-agent/actions/workflows/ci.yml/badge.svg)
-![Version](https://img.shields.io/badge/version-1.0.0-blue)
+![Version](https://img.shields.io/badge/version-2.0.0-blue)
+
+**v2 CPU 研究版已实现。** 正式 Anomalib PatchCore / EfficientAD、原图切片定位、二级 U-Net、真实数据三种子主动学习、模型注册与回滚已接入。自动放行仍关闭；功能完成不等于研究指标或产线风险验收通过。使用方法见 [v2 使用与复现](docs/v2使用与复现.md)，实测见 [v2 验证报告](docs/v2验证报告.md)。下方保留 v1 轻量演示入口，旧版本仍可运行。
 
 **Visual Quality Inspection Agent · CPU anomaly detection, calibrated routing and active learning**
 
@@ -109,7 +111,7 @@ a001,images/good.png,pcb,train,0,batch01-part01,
 a002,images/scratch.png,pcb,calibration,1,batch02-part03,masks/scratch.png
 ```
 
-路径相对 manifest，也可以是绝对路径。split 支持 `train/prob_fit/calibration/validation/test/pool`；label 为 0=正常、1=缺陷，只有 pool 可为空；mask 非零像素表示缺陷。
+路径相对 manifest，也可以是绝对路径。split 支持 `train/dev/prob_fit/calibration/acceptance/test/pool`，兼容 v1 的 `validation`；label 为 0=正常、1=缺陷，只有 pool 可为空；mask 非零像素表示缺陷。
 
 每个模型仅一个产品类别，train 只允许正常。重复图像不能跨集合；同一工件及其增强图像填同一 group。只含正常校准集时无法证明缺陷漏检率，系统不会自动放行。默认风险阈值 1%，小校准集会导致高复核率。
 
@@ -121,16 +123,17 @@ a002,images/scratch.png,pcb,calibration,1,batch02-part03,masks/scratch.png
 
 默认 `--protocol official`：所有官方训练正常图进入 train，官方训练缺陷（若有）放入 pool，完整官方测试集保留为 test。主评测用 `benchmark_public.py`，只报告检测与定位，不生成风险证书。路由实验改用 `--protocol routing`，仅在官方训练部分继续划分。MVTec 等没有训练缺陷时，自动放行将保持关闭。真实数据需自行补充工件/批次 group；不同许可见计划书。
 
-## 可选正式模型
+## v2 正式深度模型
 
-建议使用单独的 Python 3.11/3.12 环境安装 `.[deep,onnx]`，再执行：
+本机已验证 Python 3.14、Anomalib 2.2.0、PyTorch 2.12.1。Windows 安装版本记录在 `requirements-v2-tested.txt`。v2 模型目录可直接用于同一 FastAPI / Streamlit 服务：
 
 ```powershell
-python scripts/train_anomalib.py --manifest data/bottle.csv --output runs/patchcore-bottle --model patchcore
-python scripts/train_anomalib.py --manifest data/bottle.csv --output runs/efficientad-bottle --model efficientad --epochs 20
+powershell -ExecutionPolicy Bypass -File scripts/setup-v2.ps1
+.\.venv-v2\Scripts\python.exe scripts/v2.py train --manifest data/ksdd2-v2.csv --output runs/my-v2 --config configs/v2/patchcore-letterbox256.json
+powershell -ExecutionPolicy Bypass -File scripts/start.ps1 -V2 -Run runs/my-v2 -State runs/state-v2
 ```
 
-此入口可能下载预训练权重；EfficientAD 还可能需要其实现所用的外部训练资源。它导出真实模型，输出尚不能直接替换默认 CPU 模型目录：仍需补接推理适配器、分数重新校准及独立验收。此可选路径未在本机执行，不计入本次测试通过范围。
+训练需要真实数据与预训练权重。完整准备、EfficientAD 对照、二级反馈、独立重校准、ONNX 和回滚命令见 [v2 使用与复现](docs/v2使用与复现.md)。`scripts/train_anomalib.py` 保留为旧的独立框架实验入口。
 
 ## Docker
 
@@ -145,6 +148,7 @@ scripts/           安装、启动、数据导入、绘图和可选深度训练
 tests/             统计边界、数据隔离、API 与反馈集成测试
 docs/              完善后的计划书与实际验证结果
 results/v1/        不含原图和个人路径的汇总评测快照
+results/v2/        深度模型、逐图预测、三种子学习与几何对照证据
 data/              本地数据，不纳入 Git
 runs/              模型、报告、SQLite、上传图像，不纳入 Git
 ```

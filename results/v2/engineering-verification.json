@@ -1,0 +1,30 @@
+{
+  "date": "2026-10-14",
+  "scope": "local Windows verification; no external publication",
+  "tests": {
+    "passed": 39,
+    "warnings": 44,
+    "seconds": 111.64,
+    "deep_contract_enabled": true,
+    "log_sha256": "dccdf8444f47eb9e1889f84b1e2cfcb21480cc4286faaa50473b4a534e1cbc39"
+  },
+  "pip_check": {
+    "passed": true,
+    "log_sha256": "672aec65a45bed50e70229c70934a7eebf0462595c459b83023027645d57cccf"
+  },
+  "wheel": {
+    "name": "vision_qc_agent-2.0.0-py3-none-any.whl",
+    "sha256": "99f752b7bb5707d278821d29ad281e9d3270ab5c1d3d6bb9c0cdb4ff9de10745",
+    "package_sources_match": true,
+    "build_log_sha256": "51ab1bec1485a700613732039dd83df18890edfbcd1d42be91f54ed27490df97"
+  },
+  "service": {
+    "version": "v2-b2370c51061edb9e",
+    "schema_version": 2,
+    "backend": "patchcore",
+    "validation_reference_only": true
+  },
+  "cloud_ci_executed": false,
+  "docker_build_verified": false,
+  "manual_ui": "Local image upload returned review, native-coordinate overlay and secondary reference score."
+}

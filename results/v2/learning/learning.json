@@ -1,0 +1,155 @@
+{
+  "schema_version": 2,
+  "manifest_sha256": "f54e6a84f1bdc07550ee0275db5f876e8cb0207a94300418867a96f54485dbcb",
+  "base_policy_sha256": "57c7d62d073f514d5efe186415e5aaa41f5a2796f8b7fe683fb8b02314e48b38",
+  "seeds": [
+    17,
+    42,
+    2026
+  ],
+  "budgets": [
+    10,
+    20,
+    40
+  ],
+  "steps_per_fit": 200,
+  "target_auroc": 0.96,
+  "summary": [
+    {
+      "strategy": "random",
+      "budget": 10,
+      "mean": 0.7576121794871794,
+      "std": 0.18114226249439347
+    },
+    {
+      "strategy": "random",
+      "budget": 20,
+      "mean": 0.7392628205128204,
+      "std": 0.24259861833966734
+    },
+    {
+      "strategy": "random",
+      "budget": 40,
+      "mean": 0.8637019230769232,
+      "std": 0.029211429267532774
+    },
+    {
+      "strategy": "uncertainty",
+      "budget": 10,
+      "mean": 0.5698717948717948,
+      "std": 0.030786441000180485
+    },
+    {
+      "strategy": "uncertainty",
+      "budget": 20,
+      "mean": 0.6326121794871795,
+      "std": 0.14688981838043197
+    },
+    {
+      "strategy": "uncertainty",
+      "budget": 40,
+      "mean": 0.6846955128205128,
+      "std": 0.17040477511762853
+    },
+    {
+      "strategy": "coreset",
+      "budget": 10,
+      "mean": 0.7451121794871796,
+      "std": 0.22157963992243473
+    },
+    {
+      "strategy": "coreset",
+      "budget": 20,
+      "mean": 0.7475961538461539,
+      "std": 0.18948895769610796
+    },
+    {
+      "strategy": "coreset",
+      "budget": 40,
+      "mean": 0.8707532051282052,
+      "std": 0.008641595673771974
+    },
+    {
+      "strategy": "hybrid",
+      "budget": 10,
+      "mean": 0.6855769230769231,
+      "std": 0.23661662248350807
+    },
+    {
+      "strategy": "hybrid",
+      "budget": 20,
+      "mean": 0.9020032051282051,
+      "std": 0.023347439558226685
+    },
+    {
+      "strategy": "hybrid",
+      "budget": 40,
+      "mean": 0.8125801282051283,
+      "std": 0.044560288358245825
+    }
+  ],
+  "target_budgets": [
+    {
+      "strategy": "random",
+      "seed": 17,
+      "first_budget": "not_reached"
+    },
+    {
+      "strategy": "random",
+      "seed": 42,
+      "first_budget": "not_reached"
+    },
+    {
+      "strategy": "random",
+      "seed": 2026,
+      "first_budget": "not_reached"
+    },
+    {
+      "strategy": "uncertainty",
+      "seed": 17,
+      "first_budget": "not_reached"
+    },
+    {
+      "strategy": "uncertainty",
+      "seed": 42,
+      "first_budget": "not_reached"
+    },
+    {
+      "strategy": "uncertainty",
+      "seed": 2026,
+      "first_budget": "not_reached"
+    },
+    {
+      "strategy": "coreset",
+      "seed": 17,
+      "first_budget": "not_reached"
+    },
+    {
+      "strategy": "coreset",
+      "seed": 42,
+      "first_budget": "not_reached"
+    },
+    {
+      "strategy": "coreset",
+      "seed": 2026,
+      "first_budget": "not_reached"
+    },
+    {
+      "strategy": "hybrid",
+      "seed": 17,
+      "first_budget": "not_reached"
+    },
+    {
+      "strategy": "hybrid",
+      "seed": 42,
+      "first_budget": "not_reached"
+    },
+    {
+      "strategy": "hybrid",
+      "seed": 2026,
+      "first_budget": "not_reached"
+    }
+  ],
+  "protocol": "Frozen primary; same-budget supervised U-Net; dev reused for research; no official test labels used",
+  "caveat": "Advice-only cascade does not reduce live review rate. No labeling-time measurements; masks charged separately. Three seeds are not independent production datasets."
+}

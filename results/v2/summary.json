@@ -1,0 +1,28 @@
+{
+  "models": [
+    {
+      "name": "v2-patchcore",
+      "image_auroc": 0.9418242830994509,
+      "pixel_auroc": 0.9565399926314366,
+      "review_rate": 0.8705179282868526,
+      "latency_p95_ms": 863.3036100000479
+    },
+    {
+      "name": "v2-efficientad",
+      "image_auroc": 0.8167480170835876,
+      "pixel_auroc": 0.8349416021293802,
+      "review_rate": 0.8894422310756972,
+      "latency_p95_ms": 731.2137349976182
+    },
+    {
+      "name": "v2-geometry-selected",
+      "image_auroc": 0.9343400447427294,
+      "pixel_auroc": 0.9898812912539975,
+      "review_rate": 0.8416334661354582,
+      "latency_p95_ms": 142.5951799997165
+    }
+  ],
+  "source_sha256": "3f3690051006dd04ab6ad22be50bf7aa320abd1d5a0e63c3292265b167b7b710",
+  "git_base_commit": "7f398a2900fafc86aae5d71ba66506aea84b5905",
+  "note": "Working-tree source hash includes unpublished v2 edits; full public test is a repeated benchmark"
+}

@@ -1,0 +1,28 @@
+[
+  {
+    "candidate": 0,
+    "config_sha256": "39cf07c3f916615987d08fe2e15dea7c6395fcf9591e08b7abc972a98b688dfc",
+    "policy_sha256": "4e11981bd453bcdc8a42cbc66d84b1c4b959d6f6c1bcc0904484b1ac84b53eb9",
+    "image_auroc": 0.9574519230769231,
+    "latency_p95_ms": 166.44395499979507,
+    "geometry": {
+      "size": 256,
+      "mode": "letterbox",
+      "overlap": 0.25,
+      "max_tiles": 64
+    }
+  },
+  {
+    "candidate": 1,
+    "config_sha256": "1a47d8dd6e80d59794463b07a7f43a4c7e66d5f7e474d46b80d79ea35c6aeaa0",
+    "policy_sha256": "ebedcb238c6c10fc392946a5b148b8549ce0e17ed24bfa0273b3c34d91466585",
+    "image_auroc": 0.9533653846153847,
+    "latency_p95_ms": 278.96717500002524,
+    "geometry": {
+      "size": 384,
+      "mode": "letterbox",
+      "overlap": 0.25,
+      "max_tiles": 64
+    }
+  }
+]

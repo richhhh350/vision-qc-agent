@@ -1,0 +1,82 @@
+[
+  {
+    "id": "ksdd2-000309",
+    "source": "hybrid",
+    "conditional_draw_probability": 0.9003875968992249,
+    "remaining": 258,
+    "score": 8.724608037439921e-35,
+    "uncertainty": 0.0
+  },
+  {
+    "id": "ksdd2-000494",
+    "source": "random_audit",
+    "conditional_draw_probability": 0.0003891050583657588,
+    "remaining": 257,
+    "score": 0.0,
+    "uncertainty": 0.0
+  },
+  {
+    "id": "ksdd2-000797",
+    "source": "hybrid",
+    "conditional_draw_probability": 0.900390625,
+    "remaining": 256,
+    "score": 0.0,
+    "uncertainty": 0.0
+  },
+  {
+    "id": "ksdd2-000840",
+    "source": "hybrid",
+    "conditional_draw_probability": 0.9003921568627451,
+    "remaining": 255,
+    "score": 0.0,
+    "uncertainty": 0.0
+  },
+  {
+    "id": "ksdd2-000118",
+    "source": "random_audit",
+    "conditional_draw_probability": 0.00039370078740157485,
+    "remaining": 254,
+    "score": 0.0,
+    "uncertainty": 0.0
+  },
+  {
+    "id": "ksdd2-000414",
+    "source": "hybrid",
+    "conditional_draw_probability": 0.9003952569169961,
+    "remaining": 253,
+    "score": 0.0,
+    "uncertainty": 0.0
+  },
+  {
+    "id": "ksdd2-000781",
+    "source": "hybrid",
+    "conditional_draw_probability": 0.9003968253968254,
+    "remaining": 252,
+    "score": 0.0,
+    "uncertainty": 0.0
+  },
+  {
+    "id": "ksdd2-000809",
+    "source": "hybrid",
+    "conditional_draw_probability": 0.900398406374502,
+    "remaining": 251,
+    "score": 2.0411521944566777e-37,
+    "uncertainty": 0.0
+  },
+  {
+    "id": "ksdd2-001146",
+    "source": "hybrid",
+    "conditional_draw_probability": 0.9004,
+    "remaining": 250,
+    "score": 0.0,
+    "uncertainty": 0.0
+  },
+  {
+    "id": "ksdd2-000345",
+    "source": "hybrid",
+    "conditional_draw_probability": 0.9004016064257029,
+    "remaining": 249,
+    "score": 0.0,
+    "uncertainty": 0.0
+  }
+]

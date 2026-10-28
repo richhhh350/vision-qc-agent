@@ -1,0 +1,82 @@
+[
+  {
+    "id": "ksdd2-000353",
+    "source": "coreset",
+    "conditional_draw_probability": 0.9003875968992249,
+    "remaining": 258,
+    "score": 0.6398057341575623,
+    "uncertainty": 0.7203885316848755
+  },
+  {
+    "id": "ksdd2-001545",
+    "source": "coreset",
+    "conditional_draw_probability": 0.9003891050583658,
+    "remaining": 257,
+    "score": 0.6338369250297546,
+    "uncertainty": 0.7323261499404907
+  },
+  {
+    "id": "ksdd2-001810",
+    "source": "random_audit",
+    "conditional_draw_probability": 0.000390625,
+    "remaining": 256,
+    "score": 0.745912492275238,
+    "uncertainty": 0.5081750154495239
+  },
+  {
+    "id": "ksdd2-000344",
+    "source": "coreset",
+    "conditional_draw_probability": 0.9003921568627451,
+    "remaining": 255,
+    "score": 0.6594470739364624,
+    "uncertainty": 0.6811058521270752
+  },
+  {
+    "id": "ksdd2-000880",
+    "source": "coreset",
+    "conditional_draw_probability": 0.9003937007874016,
+    "remaining": 254,
+    "score": 0.6424373388290405,
+    "uncertainty": 0.715125322341919
+  },
+  {
+    "id": "ksdd2-001101",
+    "source": "coreset",
+    "conditional_draw_probability": 0.9003952569169961,
+    "remaining": 253,
+    "score": 0.6564233303070068,
+    "uncertainty": 0.6871533393859863
+  },
+  {
+    "id": "ksdd2-001577",
+    "source": "random_audit",
+    "conditional_draw_probability": 0.0003968253968253968,
+    "remaining": 252,
+    "score": 0.6403528451919556,
+    "uncertainty": 0.7192943096160889
+  },
+  {
+    "id": "ksdd2-000499",
+    "source": "coreset",
+    "conditional_draw_probability": 0.900398406374502,
+    "remaining": 251,
+    "score": 0.6617034673690796,
+    "uncertainty": 0.6765930652618408
+  },
+  {
+    "id": "ksdd2-000520",
+    "source": "coreset",
+    "conditional_draw_probability": 0.9004,
+    "remaining": 250,
+    "score": 0.6368364095687866,
+    "uncertainty": 0.7263271808624268
+  },
+  {
+    "id": "ksdd2-001187",
+    "source": "coreset",
+    "conditional_draw_probability": 0.9004016064257029,
+    "remaining": 249,
+    "score": 0.6398240327835083,
+    "uncertainty": 0.7203519344329834
+  }
+]

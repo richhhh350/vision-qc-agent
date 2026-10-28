@@ -1,0 +1,70 @@
+{
+  "version": "20261014T052224-0552c12236",
+  "backend": "efficientad",
+  "weights": {
+    "detector.pt": "7b9bb69562e08e995d49c7247e64b80665da5adacf3334f45d74d461bc4c80e0"
+  },
+  "detector": {
+    "backend": "efficientad",
+    "geometry": {
+      "size": 256,
+      "mode": "letterbox",
+      "overlap": 0.25,
+      "max_tiles": 64
+    },
+    "backbone": "resnet18",
+    "bank_size": 512,
+    "max_features": 12000,
+    "seed": 42,
+    "threads": 4,
+    "implementation": "anomalib 2.2.0 torch model",
+    "score_aggregation": "max official per-tile image score",
+    "map_aggregation": "mean overlapping pixels",
+    "embedding": "mean pooled frozen feature maps",
+    "input_color": "RGB",
+    "native_coordinates": true,
+    "training": {
+      "steps": 300,
+      "train_images": 978,
+      "normalization_images": 64,
+      "teacher_sha256": "a16ded54719674435576aee641152616a640dfc6dc2b83115dab6e226610ae7d",
+      "teacher_source": "https://github.com/open-edge-platform/anomalib/releases/download/efficientad_pretrained_weights/efficientad_pretrained_weights.zip",
+      "imagenet_penalty": false,
+      "recipe": "CPU-budget ablation, not paper reproduction",
+      "final_loss": 14.167561531066895,
+      "train_seconds": 2174.5315382
+    }
+  },
+  "counts": {
+    "calibration": 307,
+    "prob_fit": 228,
+    "dev": 228,
+    "acceptance": 258,
+    "pool": 268,
+    "train": 1042,
+    "test": 1004
+  },
+  "manifest_sha256": "f54e6a84f1bdc07550ee0275db5f876e8cb0207a94300418867a96f54485dbcb",
+  "evidence": {
+    "calibration_sha256": "4ec0c464d1a126e01cb66a73ccbc0430a2e395303613b671eb0db53c4188999f",
+    "acceptance_sha256": "97de0e4b59b51cc1f2c3ed752159f8c133114f1c8abda0f426dc00f424c02571"
+  },
+  "certificate": {
+    "policy_sha256": "0552c12236c0c67bf9c6cf0e045f326994c02e19e40448f55a5a1c5d2b952fb1",
+    "calibration_sha256": "4ec0c464d1a126e01cb66a73ccbc0430a2e395303613b671eb0db53c4188999f",
+    "acceptance_sha256": "97de0e4b59b51cc1f2c3ed752159f8c133114f1c8abda0f426dc00f424c02571",
+    "category": "ksdd2",
+    "created_at": "2026-10-14T05:26:31.801909+00:00",
+    "expires_at": "2026-11-13T05:26:31.801909+00:00",
+    "independent_sampling_attested": false,
+    "synthetic": false,
+    "confidence": 0.95,
+    "target_fnr": 0.01,
+    "n_defect": 50,
+    "missed_defects": 0,
+    "false_alarm_rate": 0.0625,
+    "fnr_upper_95": 0.05815507911697226,
+    "scope": "frozen whole policy; one-time independent acceptance"
+  },
+  "train_seconds": 3308.3655617000004
+}

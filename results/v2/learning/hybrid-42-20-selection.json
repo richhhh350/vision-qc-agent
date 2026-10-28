@@ -1,0 +1,82 @@
+[
+  {
+    "id": "ksdd2-000353",
+    "source": "hybrid",
+    "conditional_draw_probability": 0.9003875968992249,
+    "remaining": 258,
+    "score": 0.47244828939437866,
+    "uncertainty": 0.9448965787887573
+  },
+  {
+    "id": "ksdd2-001545",
+    "source": "hybrid",
+    "conditional_draw_probability": 0.9003891050583658,
+    "remaining": 257,
+    "score": 0.47244828939437866,
+    "uncertainty": 0.9448965787887573
+  },
+  {
+    "id": "ksdd2-001775",
+    "source": "hybrid",
+    "conditional_draw_probability": 0.900390625,
+    "remaining": 256,
+    "score": 0.47244828939437866,
+    "uncertainty": 0.9448965787887573
+  },
+  {
+    "id": "ksdd2-001101",
+    "source": "hybrid",
+    "conditional_draw_probability": 0.9003921568627451,
+    "remaining": 255,
+    "score": 0.47244831919670105,
+    "uncertainty": 0.9448966383934021
+  },
+  {
+    "id": "ksdd2-000344",
+    "source": "hybrid",
+    "conditional_draw_probability": 0.9003937007874016,
+    "remaining": 254,
+    "score": 0.47244831919670105,
+    "uncertainty": 0.9448966383934021
+  },
+  {
+    "id": "ksdd2-000499",
+    "source": "hybrid",
+    "conditional_draw_probability": 0.9003952569169961,
+    "remaining": 253,
+    "score": 0.4724482595920563,
+    "uncertainty": 0.9448965191841125
+  },
+  {
+    "id": "ksdd2-001254",
+    "source": "hybrid",
+    "conditional_draw_probability": 0.9003968253968254,
+    "remaining": 252,
+    "score": 0.4724482595920563,
+    "uncertainty": 0.9448965191841125
+  },
+  {
+    "id": "ksdd2-000309",
+    "source": "hybrid",
+    "conditional_draw_probability": 0.900398406374502,
+    "remaining": 251,
+    "score": 0.47244828939437866,
+    "uncertainty": 0.9448965787887573
+  },
+  {
+    "id": "ksdd2-002216",
+    "source": "hybrid",
+    "conditional_draw_probability": 0.9004,
+    "remaining": 250,
+    "score": 0.47244831919670105,
+    "uncertainty": 0.9448966383934021
+  },
+  {
+    "id": "ksdd2-000420",
+    "source": "hybrid",
+    "conditional_draw_probability": 0.9004016064257029,
+    "remaining": 249,
+    "score": 0.4724482595920563,
+    "uncertainty": 0.9448965191841125
+  }
+]

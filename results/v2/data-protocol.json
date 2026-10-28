@@ -1,0 +1,23 @@
+{
+  "schema_version": 2,
+  "seed": 42,
+  "counts": {
+    "train:0": 1042,
+    "dev:0": 208,
+    "prob_fit:0": 208,
+    "calibration:0": 208,
+    "acceptance:0": 208,
+    "pool:0": 211,
+    "dev:1": 20,
+    "prob_fit:1": 20,
+    "calibration:1": 99,
+    "acceptance:1": 50,
+    "pool:1": 57,
+    "test:0": 894,
+    "test:1": 110
+  },
+  "portable_fingerprint": "f54e6a84f1bdc07550ee0275db5f876e8cb0207a94300418867a96f54485dbcb",
+  "official_test_preserved": true,
+  "independent_production_acceptance": false,
+  "caveat": "Original train reused for research; only 50 acceptance defects, 1%/95% certification impossible even at zero misses"
+}

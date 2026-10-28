@@ -22,6 +22,9 @@ class ReviewStore:
                     id INTEGER PRIMARY KEY AUTOINCREMENT, inspection_id TEXT NOT NULL,
                     label INTEGER NOT NULL CHECK(label IN (0,1)), reviewer TEXT NOT NULL,
                     note TEXT NOT NULL, created_at TEXT NOT NULL, revision INTEGER NOT NULL);
+                CREATE TABLE IF NOT EXISTS masks (
+                    inspection_id TEXT PRIMARY KEY, path TEXT NOT NULL, label_revision INTEGER NOT NULL,
+                    seconds REAL, spec_version TEXT NOT NULL);
             """)
 
     @contextmanager
@@ -86,3 +89,24 @@ class ReviewStore:
         self.get(inspection_id)
         with self.connection() as db:
             return [dict(row) for row in db.execute("SELECT label,reviewer,note,created_at,revision FROM feedback WHERE inspection_id=? ORDER BY revision", (inspection_id,))]
+
+    def refresh_result(self, inspection_id, result):
+        """Refresh time-dependent release decisions without discarding human labels."""
+        with self.connection() as db:
+            db.execute("UPDATE inspections SET result=?,route=?,status=CASE WHEN label IS NOT NULL THEN 'labeled' WHEN ?='review' THEN 'pending' ELSE 'auto' END WHERE id=?",
+                       (json.dumps(result,allow_nan=False),result["route"],result["route"],inspection_id))
+        return self.get(inspection_id)
+
+    def save_mask(self, inspection_id, path, revision, seconds=None, spec_version="1"):
+        with self.connection() as db:
+            db.execute("BEGIN IMMEDIATE")
+            row = db.execute("SELECT label,revision FROM inspections WHERE id=?",(inspection_id,)).fetchone()
+            if row is None:
+                raise KeyError("Inspection not found")
+            if row["label"] != 1 or row["revision"] != revision:
+                raise ValueError("Mask requires the current defect label revision")
+            db.execute("INSERT OR REPLACE INTO masks VALUES(?,?,?,?,?)",(inspection_id,str(path),revision,seconds,spec_version))
+
+    def masks(self):
+        with self.connection() as db:
+            return {r["inspection_id"]:dict(r) for r in db.execute("SELECT m.* FROM masks m JOIN inspections i ON i.id=m.inspection_id WHERE i.label=1 AND i.revision=m.label_revision")}

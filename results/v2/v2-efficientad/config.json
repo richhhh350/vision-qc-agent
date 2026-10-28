@@ -1,0 +1,21 @@
+{
+  "detector": {
+    "backend": "efficientad",
+    "geometry": {
+      "size": 256,
+      "mode": "letterbox",
+      "overlap": 0.25,
+      "max_tiles": 64
+    },
+    "seed": 42,
+    "threads": 4
+  },
+  "efficientad": {
+    "steps": 300,
+    "lr": 0.0001,
+    "teacher": "data/pretrained/efficientad/pretrained_teacher_small.pth"
+  },
+  "alpha_defect": 0.01,
+  "alpha_normal": 0.05,
+  "protocol": "CPU-budget EfficientAD; training steps and omitted ImageNet penalty disclosed, not paper reproduction"
+}

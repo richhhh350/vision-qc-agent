@@ -65,6 +65,11 @@ with tab_inspect:
         b.image(request("GET", f'/reviews/{row["id"]}/image?heatmap=true').content, caption="异常热力图与候选区域", width="stretch")
         st.write(result["explanation"])
         st.caption(f'路由原因：{result["reason"]} · 推理 {result["latency_ms"]:.1f} ms · 分数 {result["score"]:.3f}')
+        if result.get("secondary"):
+            st.info(f'实验二级分割参考分数：{result["secondary"]["score"]:.3f}；不是校准概率，仅辅助人工复核。')
+        if result.get("stage_timing"):
+            with st.expander("分阶段耗时"):
+                st.json(result["stage_timing"])
         with st.expander("校准详情"):
             st.json({k: result[k] for k in ("prediction_set", "p_normal", "p_defect", "defect_probability", "drift")})
             st.caption("Conformal p 值不等于缺陷概率；概率估计来自单独的拟合集。")
@@ -92,15 +97,36 @@ with tab_review:
                 else:
                     request("POST", f'/reviews/{selected["id"]}/feedback', json=dict(label=label, reviewer=reviewer, note=note, revision=selected["revision"]))
                     st.rerun()
+        if info.get("schema_version")==2 and selected["label"]==1:
+            st.caption("缺陷像素掩膜：与原图同尺寸，黑色为背景，非黑色为缺陷。先保存人工结论，再上传掩膜。")
+            mask_upload=st.file_uploader("上传缺陷掩膜",type=["png","bmp"],key="mask-"+selected["id"])
+            seconds=st.number_input("本次像素标注耗时（秒）",min_value=0.0,value=0.0)
+            if st.button("保存像素掩膜",disabled=mask_upload is None):
+                data={"revision":selected["revision"]}
+                if seconds>0:
+                    data["annotation_seconds"]=seconds
+                request("POST",f'/reviews/{selected["id"]}/mask',files={"file":(mask_upload.name,mask_upload.getvalue())},data=data)
+                st.success("像素掩膜已保存，可用于二级分割训练。")
 
 with tab_learn:
-    strategy = st.selectbox("选样策略", ["uncertainty", "coreset", "random"])
+    strategy = st.selectbox("选样策略", ["uncertainty", "coreset", "hybrid", "random"])
     budget = st.slider("本轮标注预算", 1, 50, 10)
     batch = request("GET", f"/active-learning?strategy={strategy}&budget={budget}").json()
     st.write(f'可选样本：{batch["eligible"]}；本轮建议：{len(batch["ids"])}')
     st.dataframe(pd.DataFrame({"建议复核样本 ID": batch["ids"]}), hide_index=True, width="stretch")
     st.caption("只从当前模型的未标注复核队列选样。新标签形成候选版本，经独立验证后再切换。")
-    st.code(f'vision-qc retrain --run "{info["run_dir"]}" --state "{info["state_dir"]}" --output runs/candidate-01', language="bash")
+    if info.get("schema_version")==2:
+        st.caption("正常反馈更新一级模型；带像素掩膜的缺陷反馈训练二级分割。训练完成后保留为候选版本。")
+        if st.button("训练新候选模型"):
+            st.session_state["training_job"]=request("POST","/training-jobs").json()["id"]
+        if "training_job" in st.session_state:
+            job=request("GET","/training-jobs/"+st.session_state["training_job"]).json()
+            st.json(job)
+            if job["status"]=="running" and st.button("取消训练"):
+                request("POST","/training-jobs/"+job["id"]+"/cancel")
+                st.rerun()
+    else:
+        st.code(f'vision-qc retrain --run "{info["run_dir"]}" --state "{info["state_dir"]}" --output runs/candidate-01', language="bash")
 
 with tab_eval:
     validation = info["release_gate"]["validation"]
@@ -109,6 +135,8 @@ with tab_eval:
     b.metric("验收前策略漏检率", f'{validation["auto_release_fnr"]:.2%}' if validation["auto_release_fnr"] is not None else "无缺陷证据")
     c.metric("漏检率 95% 单侧上界", f'{validation["fnr_upper_95"]:.2%}')
     st.caption("这里评估风险守门前的策略；未通过验收时，实际服务关闭自动放行。人工复核准确率需单独评估。")
+    if info.get("validation_reference_only"):
+        st.warning("此处为父模型的历史风险结果，仅供参考。当前候选已改变完整策略，必须使用新数据重新验收。")
     with st.expander("当前模型详细信息"):
         st.json(info)
     st.subheader("评测报告")

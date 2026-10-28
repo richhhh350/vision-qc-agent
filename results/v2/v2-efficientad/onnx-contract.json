@@ -1,0 +1,18 @@
+{
+  "schema_version": 2,
+  "source_policy_sha256": "0552c12236c0c67bf9c6cf0e045f326994c02e19e40448f55a5a1c5d2b952fb1",
+  "sha256": "03894bf763b923eb01d02b5ee092ec93bc94996b3a5cc0e409034350ed539c50",
+  "geometry": {
+    "size": 256,
+    "mode": "letterbox",
+    "overlap": 0.25,
+    "max_tiles": 64
+  },
+  "threads": 4,
+  "input": "RGB float32 [0,1]; fixed one-tile BCHW; normalization embedded",
+  "source_backend": "efficientad",
+  "score_aggregation": "max per tile",
+  "map_aggregation": "mean overlap",
+  "release_approved": false,
+  "note": "Changing runtime requires recalibration and fresh whole-policy acceptance"
+}

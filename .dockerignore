@@ -1,7 +1,14 @@
 .git
-.venv
+.venv*
 data
 runs
 __pycache__
 .pytest_cache
 *.egg-info
+dist
+build
+results
+.env
+.env.*
+.codex
+.agents

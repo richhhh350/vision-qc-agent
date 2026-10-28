@@ -1,0 +1,82 @@
+[
+  {
+    "id": "ksdd2-001849",
+    "source": "random_audit",
+    "conditional_draw_probability": 0.003875968992248062,
+    "remaining": 258,
+    "score": 0.5018157958984375,
+    "uncertainty": 0.996368408203125
+  },
+  {
+    "id": "ksdd2-000958",
+    "source": "random_audit",
+    "conditional_draw_probability": 0.0038910505836575876,
+    "remaining": 257,
+    "score": 0.5016009211540222,
+    "uncertainty": 0.9967981576919556
+  },
+  {
+    "id": "ksdd2-002254",
+    "source": "random_audit",
+    "conditional_draw_probability": 0.00390625,
+    "remaining": 256,
+    "score": 0.5016692280769348,
+    "uncertainty": 0.9966615438461304
+  },
+  {
+    "id": "ksdd2-000918",
+    "source": "random_audit",
+    "conditional_draw_probability": 0.00392156862745098,
+    "remaining": 255,
+    "score": 0.5016204118728638,
+    "uncertainty": 0.9967591762542725
+  },
+  {
+    "id": "ksdd2-000338",
+    "source": "random_audit",
+    "conditional_draw_probability": 0.003937007874015748,
+    "remaining": 254,
+    "score": 0.5017263293266296,
+    "uncertainty": 0.9965473413467407
+  },
+  {
+    "id": "ksdd2-001231",
+    "source": "random_audit",
+    "conditional_draw_probability": 0.003952569169960474,
+    "remaining": 253,
+    "score": 0.5018261075019836,
+    "uncertainty": 0.9963477849960327
+  },
+  {
+    "id": "ksdd2-000312",
+    "source": "random_audit",
+    "conditional_draw_probability": 0.003968253968253968,
+    "remaining": 252,
+    "score": 0.5041136145591736,
+    "uncertainty": 0.9917727708816528
+  },
+  {
+    "id": "ksdd2-001808",
+    "source": "random_audit",
+    "conditional_draw_probability": 0.00398406374501992,
+    "remaining": 251,
+    "score": 0.5020127296447754,
+    "uncertainty": 0.9959745407104492
+  },
+  {
+    "id": "ksdd2-000578",
+    "source": "random_audit",
+    "conditional_draw_probability": 0.004,
+    "remaining": 250,
+    "score": 0.5016266107559204,
+    "uncertainty": 0.9967467784881592
+  },
+  {
+    "id": "ksdd2-002270",
+    "source": "random_audit",
+    "conditional_draw_probability": 0.004016064257028112,
+    "remaining": 249,
+    "score": 0.5021854043006897,
+    "uncertainty": 0.9956291913986206
+  }
+]

@@ -1,0 +1,162 @@
+[
+  {
+    "id": "ksdd2-000809",
+    "source": "hybrid",
+    "conditional_draw_probability": 0.9004032258064516,
+    "remaining": 248,
+    "score": 0.6260297298431396,
+    "uncertainty": 0.7479405403137207
+  },
+  {
+    "id": "ksdd2-001406",
+    "source": "hybrid",
+    "conditional_draw_probability": 0.9004048582995952,
+    "remaining": 247,
+    "score": 0.6278470754623413,
+    "uncertainty": 0.7443058490753174
+  },
+  {
+    "id": "ksdd2-001134",
+    "source": "hybrid",
+    "conditional_draw_probability": 0.9004065040650406,
+    "remaining": 246,
+    "score": 0.6297240853309631,
+    "uncertainty": 0.7405518293380737
+  },
+  {
+    "id": "ksdd2-001916",
+    "source": "hybrid",
+    "conditional_draw_probability": 0.9004081632653061,
+    "remaining": 245,
+    "score": 0.6289564967155457,
+    "uncertainty": 0.7420870065689087
+  },
+  {
+    "id": "ksdd2-000469",
+    "source": "hybrid",
+    "conditional_draw_probability": 0.9004098360655738,
+    "remaining": 244,
+    "score": 0.6270978450775146,
+    "uncertainty": 0.7458043098449707
+  },
+  {
+    "id": "ksdd2-000363",
+    "source": "hybrid",
+    "conditional_draw_probability": 0.9004115226337449,
+    "remaining": 243,
+    "score": 0.6295139789581299,
+    "uncertainty": 0.7409720420837402
+  },
+  {
+    "id": "ksdd2-001976",
+    "source": "hybrid",
+    "conditional_draw_probability": 0.9004132231404959,
+    "remaining": 242,
+    "score": 0.6260950565338135,
+    "uncertainty": 0.747809886932373
+  },
+  {
+    "id": "ksdd2-000172",
+    "source": "hybrid",
+    "conditional_draw_probability": 0.9004149377593361,
+    "remaining": 241,
+    "score": 0.6308851838111877,
+    "uncertainty": 0.7382296323776245
+  },
+  {
+    "id": "ksdd2-001146",
+    "source": "hybrid",
+    "conditional_draw_probability": 0.9004166666666666,
+    "remaining": 240,
+    "score": 0.6304106712341309,
+    "uncertainty": 0.7391786575317383
+  },
+  {
+    "id": "ksdd2-000958",
+    "source": "hybrid",
+    "conditional_draw_probability": 0.900418410041841,
+    "remaining": 239,
+    "score": 0.6259554624557495,
+    "uncertainty": 0.748089075088501
+  },
+  {
+    "id": "ksdd2-002119",
+    "source": "hybrid",
+    "conditional_draw_probability": 0.9004201680672269,
+    "remaining": 238,
+    "score": 0.6288455128669739,
+    "uncertainty": 0.7423089742660522
+  },
+  {
+    "id": "ksdd2-000110",
+    "source": "hybrid",
+    "conditional_draw_probability": 0.9004219409282701,
+    "remaining": 237,
+    "score": 0.6255601644515991,
+    "uncertainty": 0.7488796710968018
+  },
+  {
+    "id": "ksdd2-001576",
+    "source": "hybrid",
+    "conditional_draw_probability": 0.9004237288135594,
+    "remaining": 236,
+    "score": 0.6305691003799438,
+    "uncertainty": 0.7388617992401123
+  },
+  {
+    "id": "ksdd2-000929",
+    "source": "random_audit",
+    "conditional_draw_probability": 0.00042553191489361707,
+    "remaining": 235,
+    "score": 0.6351664662361145,
+    "uncertainty": 0.729667067527771
+  },
+  {
+    "id": "ksdd2-000672",
+    "source": "hybrid",
+    "conditional_draw_probability": 0.9004273504273504,
+    "remaining": 234,
+    "score": 0.6302850842475891,
+    "uncertainty": 0.7394298315048218
+  },
+  {
+    "id": "ksdd2-001708",
+    "source": "hybrid",
+    "conditional_draw_probability": 0.9004291845493563,
+    "remaining": 233,
+    "score": 0.6262451410293579,
+    "uncertainty": 0.7475097179412842
+  },
+  {
+    "id": "ksdd2-000693",
+    "source": "hybrid",
+    "conditional_draw_probability": 0.9004310344827586,
+    "remaining": 232,
+    "score": 0.6301021575927734,
+    "uncertainty": 0.7397956848144531
+  },
+  {
+    "id": "ksdd2-001329",
+    "source": "hybrid",
+    "conditional_draw_probability": 0.9004329004329005,
+    "remaining": 231,
+    "score": 0.6274049878120422,
+    "uncertainty": 0.7451900243759155
+  },
+  {
+    "id": "ksdd2-001777",
+    "source": "hybrid",
+    "conditional_draw_probability": 0.9004347826086957,
+    "remaining": 230,
+    "score": 0.6294994354248047,
+    "uncertainty": 0.7410011291503906
+  },
+  {
+    "id": "ksdd2-000968",
+    "source": "hybrid",
+    "conditional_draw_probability": 0.9004366812227075,
+    "remaining": 229,
+    "score": 0.6267837882041931,
+    "uncertainty": 0.7464324235916138
+  }
+]
